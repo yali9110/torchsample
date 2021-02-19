@@ -448,7 +448,7 @@ class ModuleTrainer(object):
         num_batches = int(math.ceil(len_inputs / batch_size))
         # --------------------------------------------------------
 
-        predict_helper = _get_helper(self, num_inputs, num_targets=0)
+        predict_helper = _get_helper(self, num_inputs, num_targets) #----------------------change here
         pred_forward_fn = predict_helper.get_partial_forward_fn(self.model)
 
         loader_iter = iter(loader)
