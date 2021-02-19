@@ -448,7 +448,7 @@ class ModuleTrainer(object):
         num_batches = int(math.ceil(len_inputs / batch_size))
         # --------------------------------------------------------
 
-        predict_helper = _get_helper(self, num_inputs, num_targets) #----------------------change here
+        predict_helper = _get_helper(self, num_inputs, num_targets=0) 
         pred_forward_fn = predict_helper.get_partial_forward_fn(self.model)
 
         loader_iter = iter(loader)
@@ -783,7 +783,7 @@ class SingleInput_NoTarget_Helper(object):
         input_batch = Variable(inputs[batch_idx*batch_size:(batch_idx+1)*batch_size], volatile=volatile)
         return input_batch, None
     def grab_batch_from_loader(self, loader_iter, volatile=False):
-        input_batch = next(loader_iter)
+        input_batch, target_batch = next(loader_iter)#--------------------change here
         return Variable(input_batch, volatile=volatile), None
     def apply_transforms(self, tforms, input_batch, target_batch=None):
         input_batch = tforms[0](input_batch)
